@@ -1,0 +1,18 @@
+@charset "EUC-KR";
+
+/* 부트스트랩에서 가져온 스타일 */
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
+/* 추가적인 사용자 정의 스타일 */
+body {
+    padding-top: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}

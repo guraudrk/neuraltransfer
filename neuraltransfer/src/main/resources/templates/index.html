@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <!-- alert 스타일링을 위한 부트스트랩 CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div id="header">
+    뉴럴 변환을 이용한 이미지 생성
+</div>
+
+<div id="uploadSection">
+    <div class="centered-container">
+        <div class="upload-container">
+            <div class="upload-box" id="contentBox">
+                <input type="file" id="contentImage" name="contentImage" accept="image/*" onchange="displayImage('contentImage', 'contentBox')">
+                <span class="upload-text">스타일 사진을 업로드해주세요</span>
+            </div>
+            <div class="upload-box" id="styleBox">
+                <input type="file" id="styleImage" name="styleImage" accept="image/*" onchange="displayImage('styleImage', 'styleBox')">
+                <span class="upload-text">컨텐츠 사진을 업로드해주세요</span>
+            </div>
+            <div class="upload-box" id="thirdBox">
+                <input type="file" id="thirdImage" name="thirdImage" accept="image/*" onchange="displayImage('thirdImage', 'thirdBox')">
+                <span class="upload-text">결과 이미지</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Image</button>
+    </div>
+</div>
+
+<div id="description" class="centered-container">
+    <p>
+        뉴럴 변환(NEURAL TRANSFER)를 통해 이미지를 합성시켜드립니다.<br>
+        컨텐츠 사진을 스타일 사진의 느낌으로 변환시켜드려요!<br>
+        (2개의 사진을 넣으면 자동으로 변환됩니다.)
+    </p>
+</div>
+
+<div id="buttons" class="centered-container">
+    <a onclick="loginButtonAction()" class="btn btn-primary button">로그인</a>
+    <a th:href="@{/logout}" class="btn btn-secondary button">로그아웃</a>
+    <a th:href="@{/database}" onclick="showAlert('로그인을 해야 데이터베이스에 접근할 수 있습니다.')" class="btn btn-success button">데이터베이스</a>
+    <a th:unless="${loggedIn}" th:href="@{/save}" class="btn btn-warning button">회원가입</a>
+</div>
+
+  <!-- 알림창 표시를 위한 스크립트 -->
+    <script th:if="${not #strings.isEmpty(successMessage) or not #strings.isEmpty(errorMessage)}">
+        $(document).ready(function(){
+        	var message = /*[[${#strings.isEmpty(successMessage) ? errorMessage : successMessage}]]*/ "";
+            var alertType = /*[[${alertType}]]*/ "";
+
+            showAlert(message, alertType);
+        });
+
+        function showAlert(message, alertType) {
+            var alertDiv = $('<div class="alert alert-' + alertType + ' alert-dismissible fade show" role="alert">' +
+                             '<strong>' + message + '</strong>' +
+                             '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                             '<span aria-hidden="true">&times;</span></button></div>');
+
+            // 알림창을 body에 추가
+            $('body').append(alertDiv);
+        }
+    </script>
+
+    <!-- 메인 페이지 스크립트 -->
+    <script th:inline="javascript">
+        var loggedIn = /*[[${loggedIn}]]*/ false;
+
+        function loginButtonAction() {
+            if (loggedIn === true) {
+                showAlert('이미 로그인 되어 있습니다.');
+            } else {
+                location.reload();
+                window.location.href = '/login';
+            }
+        }
+
+        function displayImage(inputId, boxId) {
+            var input = document.getElementById(inputId);
+            var box = document.getElementById(boxId);
+            var text = box.querySelector('.upload-text');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    box.style.backgroundImage = 'url(' + e.target.result + ')';
+                    box.style.backgroundSize = 'cover';
+                    text.style.display = 'none';
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <!-- body 종료 태그 -->
+
+</body>
+</html>

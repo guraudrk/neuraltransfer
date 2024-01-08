@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Database Page</title>
+
+    <!-- 분리된 CSS 파일 연결 -->
+    <link rel="stylesheet" th:href="@{/path/to/styles.css}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- 이미지 갤러리 -->
+        <div class="col-md-12">
+            <div class="row">
+                <!-- Thymeleaf를 사용하여 동적으로 이미지를 반복적으로 출력 -->
+                <div th:each="image : ${userImages}" class="col-md-4 mb-3">
+                    <div class="card">
+                        <img th:src="${image}" class="card-img-top" alt="User Image">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" th:onclick="'downloadImage(\'' + ${image} + '\')'">
+                                Save Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부트스트랩 JS 및 제이쿼리 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- 이미지 저장을 위한 JavaScript 코드----다시 한번 숙지하기. -->
+<script>
+    function downloadImage(imageUrl) {
+        var link = document.createElement('a'); //앵커 앨리먼트 생성.
+        link.href = imageUrl; //이미지의 url을 설정한다.
+        link.download = 'image.jpg'; //파일의 이름을 설정한다.
+        document.body.appendChild(link); //엘리먼트를 현재 페이지의 body에 추가한다.
+        link.click();//앨리먼트를 클릭.
+        document.body.removeChild(link);//다운로드가 시작되었으면 페이지에는 무용.
+    }
+</script>
+
+</body>
+</html>

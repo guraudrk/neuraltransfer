@@ -1,0 +1,120 @@
+@charset "EUC-KR";
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#uploadSection {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.upload-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.upload-box {
+    width: 230px;
+    height: 180px;
+    border: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    position: relative;
+}
+
+.upload-box input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-box img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.upload-text {
+    position: absolute;
+    color: #555;
+    font-size: 16px;
+}
+
+#buttons {
+    display: flex;
+justify-content: center; /* 중앙 정렬을 유지 */   
+ align-items: center;
+ flex-direction: row; /* 수평 정렬 추가 */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.button {
+    margin: 0 5px;
+}
+
+/* YouTube-like Button Style */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+                border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}

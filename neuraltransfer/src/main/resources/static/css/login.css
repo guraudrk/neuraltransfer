@@ -1,0 +1,74 @@
+@charset "EUC-KR";
+
+/* login.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f6f8fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #0366d6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #004080;
+}
+
+/* Stylish link for '메인 페이지로 이동' button */
+#mainPageLink {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: #0366d6;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+#mainPageLink:hover {
+	color: #004080;
+    text-decoration: underline;
+}
+
+/* 이메일 찾기 링크 스타일 */
+a#findPasswordLink {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #3498db;
+}
+
+a#findPasswordLink:hover {
+    color: #2980b9;
+}
