@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dto.MemberDTO;
 import entity.MemberEntity;
@@ -195,5 +197,22 @@ public class MemberController {
 			
 			}
 			
+			//change-password에서 받아온 email과 password를 새롭게 설정한다.
+			//(value = "email") 이런 식으로 설정하지 않으면 오류가 발생할 수 있다.
+			@PostMapping("/changepassword")
+			public String handlePostChangePassword(@RequestParam(value = "email") String email, @RequestParam(value = "newPassword") String newPassword, RedirectAttributes redirectAttributes) {
+			    if (memberService.changePassword(email, newPassword)) {
+			        redirectAttributes.addFlashAttribute("successMessage", "비밀번호가 성공적으로 설정되었습니다.");
+			        return "redirect:/"; // 메인 페이지로 리다이렉션
+			    } else {
+			        return "redirect:/error"; // 사용자를 찾을 수 없는 경우 에러 페이지로 리다이렉션 또는 다른 처리를 수행
+			    }
+			}
+			
+			
+			@GetMapping("/changepassword")
+			public String showChangePasswordForm() {
+				return "changepassword";
+			}
 			
 }

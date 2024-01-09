@@ -46,3 +46,9 @@ const emailCheck = () => {
             }
         });
     }
+    
+    //비밀번호 변경 페이지로 이동하는 함수
+    function redirectToChangePassword(){
+		window.location.href="/changepassword"
+	}
+    

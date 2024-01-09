@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dto.MemberDTO;
 import entity.MemberEntity;
@@ -145,5 +146,22 @@ public class MemberService {
 		Optional<MemberEntity> byMemberEmail = memberRepository.findByEmail(memberEmail);
 	    return byMemberEmail.orElse(null);
 	}
+	
+
+	//Transactional 어노테이션은 여러 줄의 코드를 하나의 작업으로 처리해준다.
+	//하나의 작업으로 처리해주면, 부분적으로 오류가 난 것을 같이 처리할 수 있다는 장점이 있다.
+    @Transactional
+    public boolean changePassword(String email, String newPassword) {
+        Optional<MemberEntity> userOptional = memberRepository.findByEmail(email);
+
+        if (userOptional.isPresent()) {
+        	MemberEntity user = userOptional.get();
+            user.setPassword(newPassword);
+            memberRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
 
 }
